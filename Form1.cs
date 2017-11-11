@@ -23,9 +23,15 @@ namespace ZombieSim
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
             GameData.fillUpgradeList();
+            dataGrid.ColumnCount = 3;
+            DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
+            dataGrid.Columns.Insert(0, imgColumn);
             foreach (Upgrade u in GameData.Upgrades)
             {
-                listBoxUpgrades.Items.Add(u.Name);
+                object pic = ZombieSim.Properties.Resources.ResourceManager.GetObject(u.Picture);
+                Image img = new Bitmap((Image)pic);
+                DataGridViewRow row = new DataGridViewRow();
+                dataGrid.Rows.Add(img, u.Name, u.Count, u.Cost);
             }
             timerCount.Start();
         }
@@ -45,6 +51,11 @@ namespace ZombieSim
                 labelZombiesPerClick.Text = GameData.Zombies.PerClick.ToString() + " zombies per click";
             }
         }
+        /// <summary>
+        /// Function responsible for incrementing zombie count with every Big Red Button click.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonIncrementZombies_Click(object sender, EventArgs e)
         {
             if (!checkForWin())
@@ -54,6 +65,10 @@ namespace ZombieSim
                 textBoxBrainsCount.Text = GameData.Zombies.BrainsCount.ToString();
             }
         }
+        /// <summary>
+        /// Function checking if the win condition was fulfilled, and reacting if it was.
+        /// </summary>
+        /// <returns></returns>
         private bool checkForWin() {
             if (GameData.Zombies.Count >= 10)
             {

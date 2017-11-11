@@ -97,5 +97,20 @@
   <ItemGroup>
     <None Include="bin\Debug\img\zombie.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\dog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\scientist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\vaccine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\virus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\waste.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

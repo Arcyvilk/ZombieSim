@@ -28,7 +28,7 @@ namespace ZombieSim
         static Upgrade Virus = new Upgrade
         {
             Name = "Virus",
-            Picture = "virus.png",
+            Picture = "virus",
             Description = "A simple virus to turn people into mindless carcasses.",
             Cost = 10,
             Count = 0,
@@ -36,12 +36,12 @@ namespace ZombieSim
             ZombiesPerClick = 0
         };
         /// <summary>
-          /// Data structure of the "Infected Mongrel" upgrade.
-          /// </summary>
+        /// Data structure of the "Infected Mongrel" upgrade.
+        /// </summary>
         static Upgrade InfectedMongrel = new Upgrade
         {
             Name = "Infected mongrel",
-            Picture = "mongrel.png",
+            Picture = "dog",
             Description = "A homeless dog haunted by the disease. Warning, it bites!",
             Cost = 50,
             Count = 0,
@@ -54,7 +54,7 @@ namespace ZombieSim
         static Upgrade Vaccine = new Upgrade
         {
             Name = "Vaccine causing zombizm",
-            Picture = "vaccine.png",
+            Picture = "vaccine",
             Description = "Vaccine causing zombizm. Do not pretend they didn't try to warn you.",
             Cost = 100,
             Count = 0,
@@ -67,8 +67,8 @@ namespace ZombieSim
         static Upgrade ToxicWastes = new Upgrade
         {
             Name = "Toxic waste",
-            Picture = "waste.png",
-            Description = "Tozic, radioactive wastes.",
+            Picture = "waste",
+            Description = "Toxic, radioactive wastes.",
             Cost = 400,
             Count = 0,
             ZombiesPerTick = 20,
@@ -80,7 +80,7 @@ namespace ZombieSim
         static Upgrade MadScientist = new Upgrade
         {
             Name = "Mad scientist",
-            Picture = "scientist.png",
+            Picture = "scientist",
             Description = "This nice scientist devoted his life to turn the whole humanity into zombies.",
             Cost = 1000,
             Count = 0,
@@ -93,7 +93,7 @@ namespace ZombieSim
         static Upgrade Altar = new Upgrade
         {
             Name = "Altar for the Old Gods",
-            Picture = "altar.png",
+            Picture = "virus", //change this one
             Description = "The Old Gods enjoy a nice altar and a bloody sacrifice.",
             Cost = 2000,
             Count = 0,
