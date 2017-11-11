@@ -23,7 +23,7 @@ namespace ZombieSim
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
             GameData.fillUpgradeList();
-            foreach (Upgrades u in GameData.Upgrades)
+            foreach (Upgrade u in GameData.Upgrades)
             {
                 listBoxUpgrades.Items.Add(u.Name);
             }

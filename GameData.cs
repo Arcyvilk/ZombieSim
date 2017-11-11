@@ -18,27 +18,78 @@ namespace ZombieSim
             "Using brains (1 zombie = 1 brain), you can unlock unique upgrades which speed up this process.\n\n" +
             "Good luck!";
         public static Zombies Zombies { get; set; } = new Zombies();
-        public static Upgrades Viruses { get; set; } =
-            new Upgrades("Virus", "virus.png", "A simple virus to turn people into mindless carcasses.", 10, 0, 1, 0);
-        public static Upgrades InfectedMongrels { get; set; } =
-            new Upgrades("Infected mongrel", "mongrel.png", "A homeless dog haunted by the disease. Warning, it bites!", 50, 0, 5, 0);
-        public static Upgrades Vaccines { get; set; } =
-            new Upgrades("Vaccine causing zombizm", "vaccine.png", "Vaccine causing zombizm. You cannot say they didn't warn you.", 100, 0, 10, 0);
-        public static Upgrades ToxicWastes { get; set; } =
-            new Upgrades("Toxic waste", "waste.png", "Toxic, radioactive wastes.", 400, 0, 20, 0);
-        public static Upgrades MadScientists { get; set; } =
-            new Upgrades("Mad scientist", "scientist.png", "This nice scientist devoted his life to turn the whole humanity into zombies.", 1000, 0, 50, 0);
-        public static Upgrades Altars { get; set; } =
-            new Upgrades("Altar for the Old Gods", "altar.png", "The Old Gods like altars and bloody sacrifices.", 2000, 0, 100, 0);
-        public static List<Upgrades> Upgrades = new List<Upgrades>();
+
+        static Upgrade Virus = new Upgrade
+        {
+            Name = "Virus",
+            Picture = "virus.png",
+            Description = "A simple virus to turn people into mindless carcasses.",
+            Cost = 10,
+            Count = 0,
+            ZombiesPerTick = 1,
+            ZombiesPerClick = 0
+        };
+        static Upgrade InfectedMongrel = new Upgrade
+        {
+            Name = "Infected mongrel",
+            Picture = "mongrel.png",
+            Description = "A homeless dog haunted by the disease. Warning, it bites!",
+            Cost = 50,
+            Count = 0,
+            ZombiesPerTick = 5,
+            ZombiesPerClick = 0
+        };
+        static Upgrade Vaccine = new Upgrade
+        {
+            Name = "Vaccine causing zombizm",
+            Picture = "vaccine.png",
+            Description = "Vaccine causing zombizm. Do not pretend they didn't try to warn you.",
+            Cost = 100,
+            Count = 0,
+            ZombiesPerTick = 10,
+            ZombiesPerClick = 0
+        };
+        static Upgrade ToxicWastes = new Upgrade
+        {
+            Name = "Toxic waste",
+            Picture = "waste.png",
+            Description = "Tozic, radioactive wastes.",
+            Cost = 400,
+            Count = 0,
+            ZombiesPerTick = 20,
+            ZombiesPerClick = 0
+        };
+        static Upgrade MadScientist = new Upgrade
+        {
+            Name = "Mad scientist",
+            Picture = "scientist.png",
+            Description = "This nice scientist devoted his life to turn the whole humanity into zombies.",
+            Cost = 1000,
+            Count = 0,
+            ZombiesPerTick = 50,
+            ZombiesPerClick = 0
+        };
+        static Upgrade Altar = new Upgrade
+        {
+            Name = "Altar for the Old Gods",
+            Picture = "altar.png",
+            Description = "The Old Gods enjoy a nice altar and a bloody sacrifice.",
+            Cost = 2000,
+            Count = 0,
+            ZombiesPerTick = 100,
+            ZombiesPerClick = 0
+        };
+
+        public static List<Upgrade> Upgrades = new List<Upgrade>();
+
         public static void fillUpgradeList()
         {
-            GameData.Upgrades.Add(GameData.Viruses);
-            GameData.Upgrades.Add(GameData.InfectedMongrels);
-            GameData.Upgrades.Add(GameData.Vaccines);
+            GameData.Upgrades.Add(GameData.Virus);
+            GameData.Upgrades.Add(GameData.InfectedMongrel);
+            GameData.Upgrades.Add(GameData.Vaccine);
             GameData.Upgrades.Add(GameData.ToxicWastes);
-            GameData.Upgrades.Add(GameData.MadScientists);
-            GameData.Upgrades.Add(GameData.Altars);
+            GameData.Upgrades.Add(GameData.MadScientist);
+            GameData.Upgrades.Add(GameData.Altar);
         }
         static GameData()
         {

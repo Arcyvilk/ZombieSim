@@ -9,7 +9,7 @@ namespace ZombieSim
     /// <summary>
     /// Class storing the data on the particular upgrades unlocked throrough the game
     /// </summary>
-    public class Upgrades
+    public class Upgrade
     {
         public string Name { get; set; } //name of the upgrade
         public string Picture { get; set; } //picture of the upgrade
@@ -18,15 +18,5 @@ namespace ZombieSim
         public int Count { get; set; } //amount of the particular upgrade
         public int ZombiesPerTick { get; set; } //amount of zombie per second given by this particular upgrade
         public int ZombiesPerClick { get; set; } //amount of zombie per click given by this particular upgrade
-        public Upgrades(string name, string picture, string description, float cost, int count, int zombiesPerTick, int zombiesPerClick)
-        {
-            Name = name;
-            Picture = picture;
-            Description = description;
-            Cost = cost;
-            Count = count;
-            ZombiesPerTick = zombiesPerTick;
-            ZombiesPerClick = zombiesPerClick;
-        }
     }
 }
