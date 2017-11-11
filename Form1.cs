@@ -36,40 +36,35 @@ namespace ZombieSim
         /// <param name="e"></param>
         private void timerCount_Tick(object sender, EventArgs e)
         {
-            GameData.Zombies.addZombies(GameData.Zombies.PerTick);
-            labelZombieCount.Text = GameData.Zombies.Count.ToString();
-            labelBrainsCount.Text = GameData.Zombies.BrainsCount.ToString();
-            labelZombiesPerSecond.Text = GameData.Zombies.PerTick.ToString() + " zombies per second";
-            labelZombiesPerClick.Text = GameData.Zombies.PerClick.ToString() + " zombies per click";
+            if (!checkForWin())
+            {
+                GameData.Zombies.addZombies(GameData.Zombies.PerTick);
+                textBoxZombieCount.Text = GameData.Zombies.Count.ToString();
+                textBoxBrainsCount.Text = GameData.Zombies.BrainsCount.ToString();
+                labelZombiesPerSecond.Text = GameData.Zombies.PerTick.ToString() + " zombies per second";
+                labelZombiesPerClick.Text = GameData.Zombies.PerClick.ToString() + " zombies per click";
+            }
         }
-        /// <summary>
-        /// Changes the button's picture to buttonPushed after pressing LMB.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pictureBoxButton_MouseDown(object sender, MouseEventArgs e)
+        private void buttonIncrementZombies_Click(object sender, EventArgs e)
         {
-            pictureBoxButton.Image = ZombieSim.Properties.Resources.buttonPushed;
+            if (!checkForWin())
+            {
+                GameData.Zombies.addZombies(GameData.Zombies.PerClick);
+                textBoxZombieCount.Text = GameData.Zombies.Count.ToString();
+                textBoxBrainsCount.Text = GameData.Zombies.BrainsCount.ToString();
+            }
         }
-        /// <summary>
-        /// Changes the button's picture to buttonReady after pressing LMB.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pictureBoxButton_MouseUp(object sender, MouseEventArgs e)
-        {
-            pictureBoxButton.Image = ZombieSim.Properties.Resources.buttonReady;
-        }
-        /// <summary>
-        /// Obsługuje zdarzenia przypisane do pojedynczego przyciśnięcia przycisku (inkrementacja zombie)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pictureBoxButton_Click(object sender, EventArgs e)
-        {
-            GameData.Zombies.addZombies(GameData.Zombies.PerClick);
-            labelZombieCount.Text = GameData.Zombies.Count.ToString();
-            labelBrainsCount.Text = GameData.Zombies.BrainsCount.ToString();
+        private bool checkForWin() {
+            if (GameData.Zombies.Count >= 10)
+            {
+                timerCount.Stop();
+                buttonIncrementZombies.Enabled = false;
+                MessageBox.Show("Congratulations, you won the game! \n" +
+                    "Whole humanity got succesfully converted into zombies. Are you happy with yourself?",
+                    GameData.Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            return false;
         }
     }
 }

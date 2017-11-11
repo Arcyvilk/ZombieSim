@@ -11,7 +11,10 @@ namespace ZombieSim
     /// </summary>
     public static class GameData
     {
-        public static string Title { get; set; } = "Zombie Apocalypse Simulator";
+        public static string Title { get; set; } = "Zombie Apocalypse Simulator"; //title of the game
+        /// <summary>
+        /// Game description shown in the help file.
+        /// </summary>
         public static string GameDescription { get; set; } = "Every time you press a button," +
             "one person somewhere in the world gets turned into a zombie.\n" +
             "Your goal is to turn the whole humanity into zombies. " +
@@ -19,6 +22,9 @@ namespace ZombieSim
             "Good luck!";
         public static Zombies Zombies { get; set; } = new Zombies();
 
+        /// <summary>
+        /// Data structure of the "Virus" upgrade.
+        /// </summary>
         static Upgrade Virus = new Upgrade
         {
             Name = "Virus",
@@ -29,6 +35,9 @@ namespace ZombieSim
             ZombiesPerTick = 1,
             ZombiesPerClick = 0
         };
+        /// <summary>
+          /// Data structure of the "Infected Mongrel" upgrade.
+          /// </summary>
         static Upgrade InfectedMongrel = new Upgrade
         {
             Name = "Infected mongrel",
@@ -39,6 +48,9 @@ namespace ZombieSim
             ZombiesPerTick = 5,
             ZombiesPerClick = 0
         };
+        /// <summary>
+        /// Data structure of the "Vaccine causing zombizm" upgrade.
+        /// </summary>
         static Upgrade Vaccine = new Upgrade
         {
             Name = "Vaccine causing zombizm",
@@ -49,6 +61,9 @@ namespace ZombieSim
             ZombiesPerTick = 10,
             ZombiesPerClick = 0
         };
+        /// <summary>
+        /// Data structure of the "Toxic waste" upgrade.
+        /// </summary>
         static Upgrade ToxicWastes = new Upgrade
         {
             Name = "Toxic waste",
@@ -59,6 +74,9 @@ namespace ZombieSim
             ZombiesPerTick = 20,
             ZombiesPerClick = 0
         };
+        /// <summary>
+        /// Data structure of the "Mad Scientist" upgrade.
+        /// </summary>
         static Upgrade MadScientist = new Upgrade
         {
             Name = "Mad scientist",
@@ -69,6 +87,9 @@ namespace ZombieSim
             ZombiesPerTick = 50,
             ZombiesPerClick = 0
         };
+        /// <summary>
+        /// Data structure of the "Altar" upgrade.
+        /// </summary>
         static Upgrade Altar = new Upgrade
         {
             Name = "Altar for the Old Gods",
@@ -80,8 +101,14 @@ namespace ZombieSim
             ZombiesPerClick = 0
         };
 
+        /// <summary>
+        /// List containing all the Upgrade objects.
+        /// </summary>
         public static List<Upgrade> Upgrades = new List<Upgrade>();
 
+        /// <summary>
+        /// Function filling the Upgrades List with all the available upgrade objects.
+        /// </summary>
         public static void fillUpgradeList()
         {
             GameData.Upgrades.Add(GameData.Virus);
@@ -90,12 +117,6 @@ namespace ZombieSim
             GameData.Upgrades.Add(GameData.ToxicWastes);
             GameData.Upgrades.Add(GameData.MadScientist);
             GameData.Upgrades.Add(GameData.Altar);
-        }
-        static GameData()
-        {
-            Zombies.Count = 0;
-            Zombies.PerTick = 0;
-            Zombies.PerClick = 1;
         }
     }
 }
