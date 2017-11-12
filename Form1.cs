@@ -18,18 +18,33 @@ namespace ZombieSim
         public FormMain()
         {
             InitializeComponent();
-            GameData.fillUpgradeList();
+
             dataGridViewUpgrades.ColumnCount = 3;
+            dataGridViewUpgrades.Columns[0].HeaderText = "Upgrade name";
+            dataGridViewUpgrades.Columns[1].HeaderText = "Amount of owned";
+            dataGridViewUpgrades.Columns[2].HeaderText = "Cost";
             DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
             dataGridViewUpgrades.Columns.Insert(0, imgColumn);
+            foreach (DataGridViewColumn c in dataGridViewUpgrades.Columns)
+                c.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            GameData.fillUpgradeList();
+            updateUpgradeList();
+            timerCount.Start();
+        }
+        /// <summary>
+        /// Function updating the dataGridViewUpgrades data over changing.
+        /// </summary>
+        private void updateUpgradeList() {
+            dataGridViewUpgrades.Rows.Clear();
             foreach (Upgrade u in GameData.Upgrades)
             {
                 object pic = ZombieSim.Properties.Resources.ResourceManager.GetObject(u.Picture);
                 Image img = new Bitmap((Image)pic);
                 DataGridViewRow row = new DataGridViewRow();
-                dataGridViewUpgrades.Rows.Add(img, u.Name, u.Count, u.Cost);
+                dataGridViewUpgrades.Rows.Add(img, u.Name, u.Count, "💰 " + u.Cost);
             }
-            timerCount.Start();
+            dataGridViewUpgrades.Refresh();
         }
         /// <summary>
         /// Function handling showing help contents after clicking butonHelp.
@@ -112,8 +127,11 @@ namespace ZombieSim
         /// <param name="e"></param>
         private void dataGridViewUpgrades_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (GameData.Zombies.BrainsCount >= GameData.Upgrades[e.RowIndex].Cost)
-                buyUpgrade(e.RowIndex);
+            if (e.RowIndex >= 0)
+            {
+                if (GameData.Zombies.BrainsCount >= GameData.Upgrades[e.RowIndex].Cost)
+                    buyUpgrade(e.RowIndex);
+            }
         }
         /// <summary>
         /// Shows the desription of the upgrade after hovering your mouse over it.
@@ -122,10 +140,14 @@ namespace ZombieSim
         /// <param name="e"></param>
         private void dataGridViewUpgrades_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            string toolTipText = GameData.Upgrades[e.RowIndex].Description + "\n\nCurrent upgrade cost: "+GameData.Upgrades[e.RowIndex].Cost
-                +"\n\nAmount of upgrades owned: "+GameData.Upgrades[e.RowIndex].Count;
-            DataGridViewCell cell = this.dataGridViewUpgrades.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            cell.ToolTipText = toolTipText;
+            string toolTipText;
+            if (e.RowIndex >= 0)
+            {
+                toolTipText = GameData.Upgrades[e.RowIndex].Description + "\n\nCurrent upgrade cost: " + GameData.Upgrades[e.RowIndex].Cost
+                + "\n\nAmount of upgrades owned: " + GameData.Upgrades[e.RowIndex].Count;
+                DataGridViewCell cell = this.dataGridViewUpgrades.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                cell.ToolTipText = toolTipText;
+            }
         }
         /// <summary>
         /// Function handling what happens when you buy an upgrade.
@@ -136,11 +158,10 @@ namespace ZombieSim
             GameData.Zombies.PerClick += u.ZombiesPerClick;
             GameData.Zombies.PerTick += u.ZombiesPerTick;
             GameData.Zombies.BrainsCount -= u.Cost;
-            double newCost = Math.Round(u.Cost * 1.2);
+            double newCost = Math.Round(u.Cost * 1.25);
             u.Cost = Convert.ToInt64(newCost);
             u.Count++;
-            updateZombieAmounts();
-            dataGridViewUpgrades.Update();
+            updateUpgradeList();
         }
     }
 }

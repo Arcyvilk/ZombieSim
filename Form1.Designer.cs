@@ -44,7 +44,6 @@
             this.textBoxBrainsCount = new System.Windows.Forms.TextBox();
             this.panelStore = new System.Windows.Forms.Panel();
             this.dataGridViewUpgrades = new System.Windows.Forms.DataGridView();
-            this.labelStore = new System.Windows.Forms.Label();
             this.pictureBoxButton = new System.Windows.Forms.PictureBox();
             this.buttonHelp = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -146,8 +145,8 @@
             this.panelStore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panelStore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelStore.Controls.Add(this.dataGridViewUpgrades);
-            this.panelStore.Controls.Add(this.labelStore);
             this.panelStore.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelStore.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelStore.Location = new System.Drawing.Point(522, 0);
             this.panelStore.Name = "panelStore";
             this.panelStore.Size = new System.Drawing.Size(422, 561);
@@ -169,20 +168,20 @@
             this.dataGridViewUpgrades.BackgroundColor = System.Drawing.Color.Black;
             this.dataGridViewUpgrades.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewUpgrades.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewUpgrades.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.dataGridViewUpgrades.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Northwood High", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewUpgrades.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewUpgrades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewUpgrades.ColumnHeadersVisible = false;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Northwood High", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Georgia", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -193,11 +192,11 @@
             this.dataGridViewUpgrades.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewUpgrades.EnableHeadersVisualStyles = false;
             this.dataGridViewUpgrades.GridColor = System.Drawing.Color.Black;
-            this.dataGridViewUpgrades.Location = new System.Drawing.Point(0, 39);
+            this.dataGridViewUpgrades.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewUpgrades.Name = "dataGridViewUpgrades";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Northwood High", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
@@ -215,25 +214,14 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewUpgrades.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewUpgrades.RowTemplate.Height = 110;
+            this.dataGridViewUpgrades.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridViewUpgrades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewUpgrades.ShowCellErrors = false;
             this.dataGridViewUpgrades.ShowRowErrors = false;
-            this.dataGridViewUpgrades.Size = new System.Drawing.Size(420, 520);
+            this.dataGridViewUpgrades.Size = new System.Drawing.Size(420, 559);
             this.dataGridViewUpgrades.TabIndex = 23;
             this.dataGridViewUpgrades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUpgrades_CellDoubleClick);
             this.dataGridViewUpgrades.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUpgrades_CellMouseEnter);
-            // 
-            // labelStore
-            // 
-            this.labelStore.BackColor = System.Drawing.Color.Black;
-            this.labelStore.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelStore.ForeColor = System.Drawing.Color.White;
-            this.labelStore.Location = new System.Drawing.Point(0, 0);
-            this.labelStore.Name = "labelStore";
-            this.labelStore.Size = new System.Drawing.Size(420, 39);
-            this.labelStore.TabIndex = 20;
-            this.labelStore.Text = "STORE";
-            this.labelStore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBoxButton
             // 
@@ -313,7 +301,6 @@
         private System.Windows.Forms.TextBox textBoxZombieCount;
         private System.Windows.Forms.TextBox textBoxBrainsCount;
         private System.Windows.Forms.Panel panelStore;
-        private System.Windows.Forms.Label labelStore;
         private System.Windows.Forms.DataGridView dataGridViewUpgrades;
         private System.Windows.Forms.PictureBox pictureBoxButton;
         private System.Windows.Forms.Button buttonHelp;
