@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace ZombieSim
 {
     /// <summary>
-    /// Class storing the data on the total amount of zombies there are in the game.
+    /// Klasa przechowująca dane o liczbach zombie/zombie na klika/zombie na sekundę/mózgów.
     /// </summary>
     public class Zombies
     {
-        public long Count { get; set; } = 0; //amount of zombies had
-        public long BrainsCount { get; set; } = 0;//amount of brains had
-        public long OldCount { get; set; } = 0; //amount of zombies had in previous tick
-        public long PerTick { get; set; } = 0; //ingrowth of zombies per second
-        public long PerClick { get; set; } = 1; //ingrowth of zombies per click
+        public long Count { get; set; } = 0; //liczba posiadanych zombie
+        public long BrainsCount { get; set; } = 0;//liczba posiadanych mózgów
+        public long OldCount { get; set; } = 0; //liczba zombie, które gracz posiadał w poprzednim ticku
+        public long PerTick { get; set; } = 0; //zombie na sekundę
+        public long PerClick { get; set; } = 1; //zombie na klika
 
         /// <summary>
-        /// Function responsible for incrementing the zombie count, be it by click, be it by timer tick.
+        /// Funkcja odpowiedzialna za inkrementację liczby zombie (na seukndę lub na klika)
         /// </summary>
         /// <param name="number"></param>
         public void addZombies(long number)

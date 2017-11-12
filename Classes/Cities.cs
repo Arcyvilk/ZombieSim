@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace ZombieSim
 {
     /// <summary>
-    /// Class storing the population numbers of some chosen countries.
+    /// Klasa przechowująca informacje o miastach, które mogą zostać odblokowane w trakcie gry poprzez ich zniszczenie
     /// </summary>
     public class City
     {
-        public string Name { get; set; }
-        public long Population { get; set; }
-        public bool Unlocked { get; set; } = false;
+        public string Name { get; set; } //nazwa miasta
+        public long Population { get; set; } //populacja miasta 
+        public bool Unlocked { get; set; } = false; //miasto odblokowuje się, jeśli twoja całkowita liczba zombie przekracza liczbę populacji miasta
     }
 }

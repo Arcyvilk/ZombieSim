@@ -7,32 +7,36 @@ using System.Threading.Tasks;
 namespace ZombieSim
 {
     /// <summary>
-    /// Class storing the vague data on all the game's objects.
+    /// Klasa przechowująca najważniejsze informace o stanie gry.
     /// </summary>
     public static class GameData
     {
-        public static string Title { get; set; } = "Zombie Apocalypse Simulator"; //title of the game
         /// <summary>
-        /// Game description shown in the help file.
+        /// Tytuł gry.
         /// </summary>
-        public static string GameDescription { get; set; } = "Every time you press a button, " +
-            "one person somewhere in the world gets turned into a zombie.\n" +
-            "Your goal is to turn the whole humanity into zombies. " +
-            "Using brains (1 zombie = 1 brain), you can unlock upgrades which speed up this process. "+
-            "Every upgrade purchase will raise the price of the consecutive purchases of the same type by 25%!\n\n" +
-            "Good luck!";
+        public static string Title { get; set; } = "Symulator Zombie Apokalisy";
+        /// <summary>
+        /// Opis gry (pokazywany w pliku pomocy)
+        /// </summary>
+        public static string GameDescription { get; set; } = "Za każdym razem, kiedy wciskasz Wielki Czerwony Przycisk Zagłady, " +
+            "jedna osoba gdzieś na świecie zmienia się w zombie.\n" +
+            "Twoim celem jest zamienienie w zombie całej ludzkości. " +
+            "Używając mózgów (jeden zombie dropi jeden mózg), będziesz odblokowywać ulepszenia przyspieszające ten proces "+
+            "(każde kupione ulepszenie zwiększa koszt kolejnych o 25%).\n\n" +
+            "Po drodze możesz też odblokowywać unikalne osiągnięcia.\n\n"+
+            "Powodzenia!";
         public static Zombies Zombies { get; set; } = new Zombies();
     
-    //UPGRADES
+    //ULEPSZENIA
 
         /// <summary>
-        /// Data structure of the "Virus" upgrade.
+        /// Struktura danych ulepszenia "Virus".
         /// </summary>
         static Upgrade Virus = new Upgrade
         {
-            Name = "Virus",
+            Name = "Wirus",
             Picture = "virus",
-            Description = "A simple virus to turn people into mindless carcasses.",
+            Description = "Prosty wirus zmieniający ludzi w bezmyślne żywe trupy.",
             OriginalCost = 10,
             CurrentCost = 10,
             Count = 0,
@@ -40,13 +44,13 @@ namespace ZombieSim
             ZombiesPerClick = 0
         };
         /// <summary>
-        /// Data structure of the "Virus" upgrade.
+        /// Struktura danych ulepszenia "ZombieHand".
         /// </summary>
         static Upgrade ZombieHand = new Upgrade
         {
-            Name = "Dead Hand",
+            Name = "Martwa łapa",
             Picture = "hand",
-            Description = "A rotting zombie hand that helps you clicking that Big Red Doom Button.",
+            Description = "Gnijąca łapa zombie pomagająca Ci klikać w ten Wielki Czerwony Przycisk Zagłady.",
             OriginalCost = 100,
             CurrentCost= 100,
             Count = 0,
@@ -54,13 +58,13 @@ namespace ZombieSim
             ZombiesPerClick = 2
         };
         /// <summary>
-        /// Data structure of the "Infected Mongrel" upgrade.
+        /// Struktura danych ulepszenia o nazwie "InfectedMongrel".
         /// </summary>
         static Upgrade InfectedMongrel = new Upgrade
         {
-            Name = "Infected mongrel",
+            Name = "Zainfekowany kundel",
             Picture = "dog",
-            Description = "A homeless dog haunted by the disease. Warning, it bites!",
+            Description = "Bezdomny dog opanowany przez zombiezarazę. Uwaga, gryzie!",
             OriginalCost = 500,
             CurrentCost = 500,
             Count = 0,
@@ -68,13 +72,13 @@ namespace ZombieSim
             ZombiesPerClick = 0
         };
         /// <summary>
-        /// Data structure of the "Vaccine causing zombizm" upgrade.
+        /// Struktura danych ulepszenia o nazwie "Vaccine".
         /// </summary>
         static Upgrade Vaccine = new Upgrade
         {
-            Name = "Vaccine causing zombizm",
+            Name = "Szczepionka powodująca zombizm",
             Picture = "vaccine",
-            Description = "Vaccine causing zombizm. Do not pretend they didn't try to warn you.",
+            Description = "Szczepionka powodujaca zombizm. Nie próbuj udawać, że Cię nie ostrzegali.",
             OriginalCost = 1000,
             CurrentCost = 1000,
             Count = 0,
@@ -82,13 +86,13 @@ namespace ZombieSim
             ZombiesPerClick = 1
         };
         /// <summary>
-        /// Data structure of the "Toxic waste" upgrade.
+        /// Struktura danych ulepszenia o nazwie "ToxicWastes".
         /// </summary>
         static Upgrade ToxicWastes = new Upgrade
         {
-            Name = "Toxic waste",
+            Name = "Toksyczne odpady",
             Picture = "waste",
-            Description = "Toxic, radioactive wastes.",
+            Description = "Stos paskudnych, radioaktywnych odpadów. Skąd to się w ogóle bierze?",
             OriginalCost = 5000,
             CurrentCost = 5000,
             Count = 0,
@@ -96,13 +100,13 @@ namespace ZombieSim
             ZombiesPerClick = 0
         };
         /// <summary>
-        /// Data structure of the "Mad Scientist" upgrade.
+        /// Struktura danych ulepszenia o nazwie "MadScientist".
         /// </summary>
         static Upgrade MadScientist = new Upgrade
         {
-            Name = "Mad scientist",
+            Name = "Szalony naukowiec",
             Picture = "scientist",
-            Description = "This nice scientist devoted his life to turn the whole humanity into zombies.",
+            Description = "Ten przemiły staruszek poświecił swoje życie badaniom nad obracaniem ludzi w bezmózgie żywe trupy.",
             OriginalCost = 10000,
             CurrentCost = 10000, 
             Count = 0,
@@ -110,40 +114,44 @@ namespace ZombieSim
             ZombiesPerClick = 5
         };
         /// <summary>
-        /// Data structure of the "Altar" upgrade.
+        /// Struktura danych ulepszenia o nazwie "Altar".
         /// </summary>
         static Upgrade Altar = new Upgrade
         {
-            Name = "Altar for the Old Gods",
-            Picture = "virus", //change this one
-            Description = "The Old Gods enjoy a nice altar and a bloody sacrifice.",
-            OriginalCost = 50000,
-            CurrentCost = 50000,
+            Name = "Ołtarz Pastarych Bogów",
+            Picture = "elder",
+            Description = "Prastarzy Bogowie bardzo chętnie pomogą Ci w sianiu zarazy zombie za drobną ceną krwawej ofiary.",
+            OriginalCost = 50,
+            CurrentCost = 50,
             Count = 0,
             ZombiesPerTick = 250,
             ZombiesPerClick = 10
         };
 
         /// <summary>
-        /// List containing all the Upgrade objects.
+        /// Lista gromadząca wszystkie obiekty typu Upgrade.
         /// </summary>
-        public static List<Upgrade> Upgrades = new List<Upgrade>();
+        public static List<Upgrade> UpgradeList = new List<Upgrade>();
 
         /// <summary>
-        /// Function filling the Upgrades List with all the available upgrade objects.
+        /// Funkcja wypełniająca listę UpgradeList wszystkimi dostępnymi obiektami typu Upgrade.
         /// </summary>
         public static void fillUpgradeList()
         {
-            GameData.Upgrades.Add(GameData.Virus);
-            GameData.Upgrades.Add(GameData.ZombieHand);
-            GameData.Upgrades.Add(GameData.InfectedMongrel);
-            GameData.Upgrades.Add(GameData.Vaccine);
-            GameData.Upgrades.Add(GameData.ToxicWastes);
-            GameData.Upgrades.Add(GameData.MadScientist);
-            GameData.Upgrades.Add(GameData.Altar);
+            GameData.UpgradeList.Add(GameData.Virus);
+            GameData.UpgradeList.Add(GameData.ZombieHand);
+            GameData.UpgradeList.Add(GameData.InfectedMongrel);
+            GameData.UpgradeList.Add(GameData.Vaccine);
+            GameData.UpgradeList.Add(GameData.ToxicWastes);
+            GameData.UpgradeList.Add(GameData.MadScientist);
+            GameData.UpgradeList.Add(GameData.Altar);
         }
 
-        //CITIES
+    //MIASTA
+
+        /// <summary>
+        /// Struktura danych wszystkich miast.
+        /// </summary>
         static City Monako = new City
         {
             Name = "Monako",
@@ -214,10 +222,14 @@ namespace ZombieSim
             Name = "świat",
             Population = 7600000000
         };
-        public static List<City> CityList = new List<City>(); //list storing all the cities inside
 
         /// <summary>
-        /// Function filling the City list with the cities.
+        /// Lista gromadząca wszystkie obiekty typu City.
+        /// </summary>
+        public static List<City> CityList = new List<City>();
+
+        /// <summary>
+        /// Funkcja wypełniająca listę CityList wszystkimi dostępnymi obiektami typu City.
         /// </summary>
         public static void fillCityList()
         {

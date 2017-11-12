@@ -117,6 +117,7 @@
     <None Include="bin\Debug\img\waste.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\img\elder.png" />
     <None Include="bin\Debug\img\hand.png" />
     <Content Include="icon.ico" />
   </ItemGroup>
