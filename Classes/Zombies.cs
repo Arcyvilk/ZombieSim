@@ -13,6 +13,7 @@ namespace ZombieSim
     {
         public long Count { get; set; } = 0; //amount of zombies had
         public long BrainsCount { get; set; } = 0;//amount of brains had
+        public long OldCount { get; set; } = 0; //amount of zombies had in previous tick
         public long PerTick { get; set; } = 0; //ingrowth of zombies per second
         public long PerClick { get; set; } = 1; //ingrowth of zombies per click
 
@@ -22,6 +23,7 @@ namespace ZombieSim
         /// <param name="number"></param>
         public void addZombies(long number)
         {
+            OldCount = Count;
             Count += number;
             BrainsCount += number;
         }

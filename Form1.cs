@@ -29,23 +29,93 @@ namespace ZombieSim
                 c.SortMode = DataGridViewColumnSortMode.NotSortable;
 
             GameData.fillUpgradeList();
+            GameData.fillCityList();
+            
             updateUpgradeList();
             timerCount.Start();
+        }
+
+        /// <summary>
+        /// Function handling what happens when you buy an upgrade.
+        /// </summary>
+        /// <param name="upgradeIndex"></param>
+        private void buyUpgrade(int upgradeIndex)
+        {
+            Upgrade u = GameData.Upgrades[upgradeIndex];
+            GameData.Zombies.PerClick += u.ZombiesPerClick;
+            GameData.Zombies.PerTick += u.ZombiesPerTick;
+            GameData.Zombies.BrainsCount -= u.CurrentCost;
+            double newCost = Math.Round(u.CurrentCost * 1.25);
+            u.CurrentCost = Convert.ToInt64(newCost);
+            u.Count++;
+            updateZombieAmounts();
+            updateUpgradeList();
         }
         /// <summary>
         /// Function updating the dataGridViewUpgrades data over changing.
         /// </summary>
-        private void updateUpgradeList() {
+        private void updateUpgradeList()
+        {
             dataGridViewUpgrades.Rows.Clear();
             foreach (Upgrade u in GameData.Upgrades)
             {
-                object pic = ZombieSim.Properties.Resources.ResourceManager.GetObject(u.Picture);
-                Image img = new Bitmap((Image)pic);
-                DataGridViewRow row = new DataGridViewRow();
-                dataGridViewUpgrades.Rows.Add(img, u.Name, u.Count, "💰 " + u.Cost);
+                if (GameData.Zombies.Count >= u.OriginalCost)
+                {
+                    object pic = ZombieSim.Properties.Resources.ResourceManager.GetObject(u.Picture);
+                    Image img = new Bitmap((Image)pic);
+                    DataGridViewRow row = new DataGridViewRow();
+                    dataGridViewUpgrades.Rows.Add(img, u.Name, u.Count, u.CurrentCost);
+                }
             }
             dataGridViewUpgrades.Refresh();
         }
+        /// <summary>
+        /// Updates the amount of zombies/brains owned.
+        /// </summary>
+        private void updateZombieAmounts()
+        {
+            textBoxZombieCount.Text = GameData.Zombies.Count.ToString();
+            textBoxBrainsCount.Text = GameData.Zombies.BrainsCount.ToString();
+            labelZombiesPerSecond.Text = GameData.Zombies.PerTick.ToString() + " zombies per second";
+            labelZombiesPerClick.Text = GameData.Zombies.PerClick.ToString() + " zombies per click";
+            foreach (Upgrade u in GameData.Upgrades)
+            {
+                if (GameData.Zombies.OldCount <= u.OriginalCost && GameData.Zombies.Count >= u.OriginalCost)
+                    updateUpgradeList();
+            }
+        }
+        private void checkForDestroyedCities()
+        {
+            foreach (City c in GameData.CityList)
+            {
+                if (GameData.Zombies.OldCount <= c.Population && GameData.Zombies.Count >= c.Population && c.Unlocked == false)
+                {
+                    c.Unlocked = true;
+                    MessageBox.Show("Gratulacje! Cała populacja "+ c.Name + " w liczbie "+c.Population + " osób została zamieniona w zombie. Dobra robota!",
+                        GameData.Title,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+            }
+        }
+        /// <summary>
+        /// Function checking if the win condition was fulfilled, and reacting if it was.
+        /// </summary>
+        /// <returns></returns>
+        private bool checkForWin()
+        {
+            if (GameData.Zombies.Count >= 7000000000)
+            {
+                timerCount.Stop();
+                pictureBoxButton.Enabled = false;
+                MessageBox.Show("Congratulations, you won the game! \n" +
+                    "Whole humanity got succesfully converted into zombies. I hope you are happy with yourself.",
+                    GameData.Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Function handling showing help contents after clicking butonHelp.
         /// </summary>
@@ -54,6 +124,24 @@ namespace ZombieSim
         private void buttonHelp_Click(object sender, EventArgs e)
         {
             MessageBox.Show(GameData.GameDescription,
+                GameData.Title,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+        /// <summary>
+        /// Function handling showing the list of achievements (destroyed cities).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAchievement_Click(object sender, EventArgs e)
+        {
+            string achievements = "ZNISZCZONE MIASTA/PAŃSTWA:\n";
+            foreach (City c in GameData.CityList)
+            {
+                if (c.Unlocked)
+                    achievements += c.Name + "\n";
+            }
+            MessageBox.Show(achievements,
                 GameData.Title,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
@@ -69,6 +157,7 @@ namespace ZombieSim
             {
                 GameData.Zombies.addZombies(GameData.Zombies.PerTick);
                 updateZombieAmounts();
+                checkForDestroyedCities();
             }
         }
         /// <summary>
@@ -94,32 +183,7 @@ namespace ZombieSim
         {
             pictureBoxButton.Image = ZombieSim.Properties.Resources.buttonReady;
         }
-        /// <summary>
-        /// Updates the amount of zombies/brains owned.
-        /// </summary>
-        private void updateZombieAmounts()
-        {
-            textBoxZombieCount.Text = GameData.Zombies.Count.ToString();
-            textBoxBrainsCount.Text = GameData.Zombies.BrainsCount.ToString();
-            labelZombiesPerSecond.Text = GameData.Zombies.PerTick.ToString() + " zombies per second";
-            labelZombiesPerClick.Text = GameData.Zombies.PerClick.ToString() + " zombies per click";
-        }
-        /// <summary>
-        /// Function checking if the win condition was fulfilled, and reacting if it was.
-        /// </summary>
-        /// <returns></returns>
-        private bool checkForWin() {
-            if (GameData.Zombies.Count >= 7000000000)
-            {
-                timerCount.Stop();
-                pictureBoxButton.Enabled = false;
-                MessageBox.Show("Congratulations, you won the game! \n" +
-                    "Whole humanity got succesfully converted into zombies. I hope you are happy with yourself.",
-                    GameData.Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return true;
-            }
-            return false;
-        }
+        
         /// <summary>
         /// Function handling clicking on the elements inside dataGridViewUpgrades.
         /// </summary>
@@ -129,8 +193,12 @@ namespace ZombieSim
         {
             if (e.RowIndex >= 0)
             {
-                if (GameData.Zombies.BrainsCount >= GameData.Upgrades[e.RowIndex].Cost)
+                if (GameData.Zombies.BrainsCount >= GameData.Upgrades[e.RowIndex].CurrentCost)
                     buyUpgrade(e.RowIndex);
+                else MessageBox.Show("You don't have enough brains to purchase this upgrade!", 
+                    "You're too poor fo this, sorry :c", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Stop);
             }
         }
         /// <summary>
@@ -146,27 +214,13 @@ namespace ZombieSim
                 Upgrade u = GameData.Upgrades[e.RowIndex];
                 toolTipText = u.Name.ToUpper() 
                     + " [owned: " + u.Count + "] "
-                    + "[cost: " + u.Cost + "]"
+                    + "[cost: " + u.CurrentCost + "]"
                     + "\n\n" + u.Description
                     + "\n\nProduces " + u.ZombiesPerTick + " zombies per second"
                     + "\nGives " + u.ZombiesPerClick + " zombies per click";
                 DataGridViewCell cell = this.dataGridViewUpgrades.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 cell.ToolTipText = toolTipText;
             }
-        }
-        /// <summary>
-        /// Function handling what happens when you buy an upgrade.
-        /// </summary>
-        /// <param name="upgradeIndex"></param>
-        private void buyUpgrade(int upgradeIndex) {
-            Upgrade u = GameData.Upgrades[upgradeIndex];
-            GameData.Zombies.PerClick += u.ZombiesPerClick;
-            GameData.Zombies.PerTick += u.ZombiesPerTick;
-            GameData.Zombies.BrainsCount -= u.Cost;
-            double newCost = Math.Round(u.Cost * 1.25);
-            u.Cost = Convert.ToInt64(newCost);
-            u.Count++;
-            updateUpgradeList();
         }
     }
 }
