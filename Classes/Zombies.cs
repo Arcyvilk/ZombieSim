@@ -12,15 +12,15 @@ namespace ZombieSim
     public class Zombies
     {
         public long Count { get; set; } = 0; //amount of zombies had
-        public int BrainsCount { get; set; } = 0;//amount of brains had
-        public int PerTick { get; set; } = 0; //ingrowth of zombies per second
-        public int PerClick { get; set; } = 1; //ingrowth of zombies per click
+        public long BrainsCount { get; set; } = 0;//amount of brains had
+        public long PerTick { get; set; } = 0; //ingrowth of zombies per second
+        public long PerClick { get; set; } = 1; //ingrowth of zombies per click
 
         /// <summary>
         /// Function responsible for incrementing the zombie count, be it by click, be it by timer tick.
         /// </summary>
         /// <param name="number"></param>
-        public void addZombies(int number)
+        public void addZombies(long number)
         {
             Count += number;
             BrainsCount += number;
