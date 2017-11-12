@@ -18,7 +18,7 @@ namespace ZombieSim
         /// - tworzy nową kolumnę na obrazki w dataGridViewUpgrades
         /// - ustawia dataGridViewUpgrades jako niesortowalne
         /// - wypełnia dataGridViewUpgrades danymi
-        /// - wypełnia UpgradeList oraz CityList
+        /// - wypełnia upgradeList oraz cityList
         /// - startuje timerCount
         /// </summary>
         public FormMain()
@@ -35,10 +35,10 @@ namespace ZombieSim
             foreach (DataGridViewColumn c in dataGridViewUpgrades.Columns)
                 c.SortMode = DataGridViewColumnSortMode.NotSortable;
 
-            GameData.fillUpgradeList();
-            GameData.fillCityList();
+            GameData.fillupgradeList();
+            GameData.fillcityList();
             
-            updateUpgradeList();
+            UpdateupgradeList();
             timerCount.Start();
         }
 
@@ -49,31 +49,31 @@ namespace ZombieSim
         /// - zwiększa liczbę posiadanych ulepszeń tego typu
         /// </summary>
         /// <param name="upgradeIndex"></param>
-        private void buyUpgrade(int upgradeIndex)
+        private void BuyUpgrade(int upgradeIndex)
         {
-            Upgrade u = GameData.UpgradeList[upgradeIndex];
+            Upgrade u = GameData.upgradeList[upgradeIndex];
             GameData.Zombies.PerClick += u.ZombiesPerClick;
             GameData.Zombies.PerTick += u.ZombiesPerTick;
             GameData.Zombies.BrainsCount -= u.CurrentCost;
             double newCost = Math.Round(u.CurrentCost * 1.25);
             u.CurrentCost = Convert.ToInt64(newCost);
             u.Count++;
-            updateZombieAmounts();
-            updateUpgradeList();
+            UpdateZombieAmounts();
+            UpdateupgradeList();
         }
         /// <summary>
         /// Funkcja updatująca liczbę posiadanych zombie/mózgów
         /// </summary>
-        private void updateZombieAmounts()
+        private void UpdateZombieAmounts()
         {
             textBoxZombieCount.Text = GameData.Zombies.Count.ToString();
             textBoxBrainsCount.Text = GameData.Zombies.BrainsCount.ToString();
             labelZombiesPerSecond.Text = GameData.Zombies.PerTick.ToString() + " zombie na sekundę";
             labelZombiesPerClick.Text = GameData.Zombies.PerClick.ToString() + " zombie na klika";
-            foreach (Upgrade u in GameData.UpgradeList)
+            foreach (Upgrade u in GameData.upgradeList)
             {
                 if (GameData.Zombies.OldCount <= u.OriginalCost && GameData.Zombies.Count >= u.OriginalCost)
-                    updateUpgradeList();
+                    UpdateupgradeList();
             }
         }
         /// <summary>
@@ -81,10 +81,10 @@ namespace ZombieSim
         /// - odblokowuje ulepszenie do kupna, jeśli liczba zombie wyprodukowanych od początku gry przekroczyła oryginalny koszt ulepszenia
         /// - odświeża listę ulepszen, jeśli jakieś zostało kupione
         /// </summary>
-        private void updateUpgradeList()
+        private void UpdateupgradeList()
         {
             dataGridViewUpgrades.Rows.Clear();
-            foreach (Upgrade u in GameData.UpgradeList)
+            foreach (Upgrade u in GameData.upgradeList)
             {
                 if (GameData.Zombies.Count >= u.OriginalCost)
                 {
@@ -100,9 +100,9 @@ namespace ZombieSim
         /// Funkcja sprawdzająca, czy liczba wszystkich posiadanych zombie przekroczyła populację danego miasta/państwa. 
         /// Jeśli tak, to miasto/państwo zostaje odblokowane jako zniszczone.
         /// </summary>
-        private void checkForDestroyedCities()
+        private void CheckForDestroyedCities()
         {
-            foreach (City c in GameData.CityList)
+            foreach (City c in GameData.cityList)
             {
                 if (GameData.Zombies.OldCount <= c.Population && GameData.Zombies.Count >= c.Population && c.Unlocked == false)
                 {
@@ -118,7 +118,7 @@ namespace ZombieSim
         /// Funkcja sprawdzająca, czy zostały spełnione warunki wygranej (zamienienie całego świata w zombie)
         /// </summary>
         /// <returns></returns>
-        private bool checkForWin()
+        private bool CheckForWin()
         {
             if (GameData.Zombies.Count >= 7600000001)
             {
@@ -152,7 +152,7 @@ namespace ZombieSim
         private void buttonAchievement_Click(object sender, EventArgs e)
         {
             string achievements = "ZNISZCZONE MIASTA/PAŃSTWA:\n";
-            foreach (City c in GameData.CityList)
+            foreach (City c in GameData.cityList)
             {
                 if (c.Unlocked)
                     achievements += c.Name + "\n";
@@ -169,11 +169,11 @@ namespace ZombieSim
         /// <param name="e"></param>
         private void timerCount_Tick(object sender, EventArgs e)
         {
-            if (!checkForWin()) //jeśli warunek wygranej nie został spełniony i gra może kontynuować
+            if (!CheckForWin()) //jeśli warunek wygranej nie został spełniony i gra może kontynuować
             {
                 GameData.Zombies.addZombies(GameData.Zombies.PerTick);
-                updateZombieAmounts();
-                checkForDestroyedCities();
+                UpdateZombieAmounts();
+                CheckForDestroyedCities();
             }
         }
         /// <summary>
@@ -183,11 +183,11 @@ namespace ZombieSim
         /// <param name="e"></param>
         private void pictureBoxButton_MouseDown(object sender, MouseEventArgs e)
         {
-            if (!checkForWin()) //jeśli warunek wygranej nie został spełniony i gra może kontynuować
+            if (!CheckForWin()) //jeśli warunek wygranej nie został spełniony i gra może kontynuować
             {
                 GameData.Zombies.addZombies(GameData.Zombies.PerClick);
                 pictureBoxButton.Image = ZombieSim.Properties.Resources.buttonPushed;
-                updateZombieAmounts();
+                UpdateZombieAmounts();
             }
         }
         /// <summary>
@@ -209,8 +209,8 @@ namespace ZombieSim
         {
             if (e.RowIndex >= 0)
             {
-                if (GameData.Zombies.BrainsCount >= GameData.UpgradeList[e.RowIndex].CurrentCost)
-                    buyUpgrade(e.RowIndex);
+                if (GameData.Zombies.BrainsCount >= GameData.upgradeList[e.RowIndex].CurrentCost)
+                    BuyUpgrade(e.RowIndex);
                 else MessageBox.Show("Nie posiadasz wystarczającej ilości mózgów, żeby kupić to ulepszenie!", 
                     "Brak funduszy", 
                     MessageBoxButtons.OK, 
@@ -218,7 +218,7 @@ namespace ZombieSim
             }
         }
         /// <summary>
-        /// Pokazuje opis ulepszenia po najechaniuna nie myszką.
+        /// Pokazuje opis ulepszenia po najechaniu na nie myszką.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -227,15 +227,21 @@ namespace ZombieSim
             string toolTipText;
             if (e.RowIndex >= 0)
             {
-                Upgrade u = GameData.UpgradeList[e.RowIndex];
-                toolTipText = u.Name.ToUpper() 
-                    + " [posiadane: " + u.Count + "] "
-                    + "[koszt: " + u.CurrentCost + "]"
-                    + "\n\n" + u.Description
-                    + "\n\nProdukuje " + u.ZombiesPerTick + " zombie na sekundę"
-                    + "\nDaje " + u.ZombiesPerClick + " zombie na klika";
-                DataGridViewCell cell = this.dataGridViewUpgrades.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                cell.ToolTipText = toolTipText;
+                string upgradeName = dataGridViewUpgrades.Rows[e.RowIndex].Cells[1].Value.ToString();
+                foreach (Upgrade u in GameData.upgradeList)
+                {
+                    if (u.Name ==upgradeName)
+                    {
+                        toolTipText = u.Name.ToUpper()
+                                            + " [posiadane: " + u.Count + "] "
+                                            + "[koszt: " + u.CurrentCost + "]"
+                                            + "\n\n" + u.Description
+                                            + "\n\nProdukuje " + u.ZombiesPerTick + " zombie na sekundę"
+                                            + "\nDaje " + u.ZombiesPerClick + " zombie na klika";
+                        DataGridViewCell cell = this.dataGridViewUpgrades.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                        cell.ToolTipText = toolTipText;
+                    }
+                }
             }
         }
     }

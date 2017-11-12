@@ -32,7 +32,7 @@ namespace ZombieSim
         /// <summary>
         /// Struktura danych ulepszenia "Virus".
         /// </summary>
-        static Upgrade Virus = new Upgrade
+        static Upgrade virus = new Upgrade
         {
             Name = "Wirus",
             Picture = "virus",
@@ -46,7 +46,7 @@ namespace ZombieSim
         /// <summary>
         /// Struktura danych ulepszenia "ZombieHand".
         /// </summary>
-        static Upgrade ZombieHand = new Upgrade
+        static Upgrade zombieHand = new Upgrade
         {
             Name = "Martwa łapa",
             Picture = "hand",
@@ -55,18 +55,18 @@ namespace ZombieSim
             CurrentCost= 100,
             Count = 0,
             ZombiesPerTick = 0,
-            ZombiesPerClick = 2
+            ZombiesPerClick = 3
         };
         /// <summary>
         /// Struktura danych ulepszenia o nazwie "InfectedMongrel".
         /// </summary>
-        static Upgrade InfectedMongrel = new Upgrade
+        static Upgrade infectedMongrel = new Upgrade
         {
             Name = "Zainfekowany kundel",
             Picture = "dog",
             Description = "Bezdomny dog opanowany przez zombiezarazę. Uwaga, gryzie!",
-            OriginalCost = 500,
-            CurrentCost = 500,
+            OriginalCost = 250,
+            CurrentCost = 250,
             Count = 0,
             ZombiesPerTick = 10,
             ZombiesPerClick = 0
@@ -74,7 +74,7 @@ namespace ZombieSim
         /// <summary>
         /// Struktura danych ulepszenia o nazwie "Vaccine".
         /// </summary>
-        static Upgrade Vaccine = new Upgrade
+        static Upgrade vaccine = new Upgrade
         {
             Name = "Szczepionka powodująca zombizm",
             Picture = "vaccine",
@@ -88,63 +88,93 @@ namespace ZombieSim
         /// <summary>
         /// Struktura danych ulepszenia o nazwie "ToxicWastes".
         /// </summary>
-        static Upgrade ToxicWastes = new Upgrade
+        static Upgrade toxicWastes = new Upgrade
         {
             Name = "Toksyczne odpady",
             Picture = "waste",
-            Description = "Stos paskudnych, radioaktywnych odpadów. Skąd to się w ogóle bierze?",
-            OriginalCost = 5000,
-            CurrentCost = 5000,
+            Description = "Stos paskudnych, radioaktywnych odpadów. Skąd to się w ogóle wzięło?",
+            OriginalCost = 2500,
+            CurrentCost = 2500,
             Count = 0,
             ZombiesPerTick = 50,
             ZombiesPerClick = 0
         };
         /// <summary>
+        /// Struktura danych ulepszenia o nazwie "Expired Food".
+        /// </summary>
+        static Upgrade expiredFood = new Upgrade
+        {
+            Name = "Nieświeży burger",
+            Picture = "food",
+            Description = "Te hamburgery nie dość, że przeterminowane, to jeszcze zawierają w sobie zombie drobnoustroje. Gdzie jest Sanepid?",
+            OriginalCost = 5000,
+            CurrentCost = 5000,
+            Count = 0,
+            ZombiesPerTick = 100,
+            ZombiesPerClick = 10
+        };
+        /// <summary>
         /// Struktura danych ulepszenia o nazwie "MadScientist".
         /// </summary>
-        static Upgrade MadScientist = new Upgrade
+        static Upgrade madScientist = new Upgrade
         {
             Name = "Szalony naukowiec",
             Picture = "scientist",
             Description = "Ten przemiły staruszek poświecił swoje życie badaniom nad obracaniem ludzi w bezmózgie żywe trupy.",
-            OriginalCost = 10000,
-            CurrentCost = 10000, 
+            OriginalCost = 8000,
+            CurrentCost = 8000, 
             Count = 0,
-            ZombiesPerTick = 100,
-            ZombiesPerClick = 5
+            ZombiesPerTick = 250,
+            ZombiesPerClick = 25
+        };
+        /// <summary>
+        /// Struktura danych ulepszenia o nazwie "Satellite".
+        /// </summary>
+        static Upgrade satellite = new Upgrade
+        {
+            Name = "Zombie satelita",
+            Picture = "satellite",
+            Description = "Ta satelita okrąża Ziemię i atakuje mózgi jeszcze żywych ludzi za pomocą fal elektromagnetycznych.",
+            OriginalCost = 12500,
+            CurrentCost = 12500,
+            Count = 0,
+            ZombiesPerTick = 500,
+            ZombiesPerClick = 50
         };
         /// <summary>
         /// Struktura danych ulepszenia o nazwie "Altar".
         /// </summary>
-        static Upgrade Altar = new Upgrade
+        static Upgrade altar = new Upgrade
         {
-            Name = "Ołtarz Pastarych Bogów",
+            Name = "Ołtarz Prastarych Bogów",
             Picture = "elder",
             Description = "Prastarzy Bogowie bardzo chętnie pomogą Ci w sianiu zarazy zombie za drobną ceną krwawej ofiary.",
-            OriginalCost = 50,
-            CurrentCost = 50,
+            OriginalCost = 20000,
+            CurrentCost = 20000,
             Count = 0,
-            ZombiesPerTick = 250,
-            ZombiesPerClick = 10
+            ZombiesPerTick = 1000,
+            ZombiesPerClick = 100
         };
 
         /// <summary>
         /// Lista gromadząca wszystkie obiekty typu Upgrade.
         /// </summary>
-        public static List<Upgrade> UpgradeList = new List<Upgrade>();
+        public static List<Upgrade> upgradeList = new List<Upgrade>();
 
         /// <summary>
-        /// Funkcja wypełniająca listę UpgradeList wszystkimi dostępnymi obiektami typu Upgrade.
+        /// Funkcja wypełniająca listę upgradeList wszystkimi dostępnymi obiektami typu Upgrade.
         /// </summary>
-        public static void fillUpgradeList()
+        public static void fillupgradeList()
         {
-            GameData.UpgradeList.Add(GameData.Virus);
-            GameData.UpgradeList.Add(GameData.ZombieHand);
-            GameData.UpgradeList.Add(GameData.InfectedMongrel);
-            GameData.UpgradeList.Add(GameData.Vaccine);
-            GameData.UpgradeList.Add(GameData.ToxicWastes);
-            GameData.UpgradeList.Add(GameData.MadScientist);
-            GameData.UpgradeList.Add(GameData.Altar);
+            GameData.upgradeList.Add(GameData.virus);
+            GameData.upgradeList.Add(GameData.zombieHand);
+            GameData.upgradeList.Add(GameData.infectedMongrel);
+            GameData.upgradeList.Add(GameData.vaccine);
+            GameData.upgradeList.Add(GameData.toxicWastes);
+            GameData.upgradeList.Add(GameData.expiredFood);
+            GameData.upgradeList.Add(GameData.madScientist);
+            GameData.upgradeList.Add(GameData.satellite);
+            GameData.upgradeList.Add(GameData.altar);
         }
 
     //MIASTA
@@ -152,72 +182,72 @@ namespace ZombieSim
         /// <summary>
         /// Struktura danych wszystkich miast.
         /// </summary>
-        static City Monako = new City
+        static City monako = new City
         {
             Name = "Monako",
             Population = 36950
         };
-        static City Radom = new City
+        static City radom = new City
         {
             Name = "Radom",
             Population = 219703
         };
-        static City Wroclaw = new City
+        static City wroclaw = new City
         {
             Name = "Wrocław",
             Population = 637683
         };
-        static City Belgrad = new City
+        static City belgrad = new City
         {
             Name = "Belgrad",
             Population = 1166763
         };
-        static City Paris = new City
+        static City paris = new City
         {
             Name = "Paryż",
             Population = 2229621
         };
-        static City NewYork = new City
+        static City newYork = new City
         {
             Name = "Nowy Jork",
             Population = 8537673
         };
-        static City Poland = new City
+        static City poland = new City
         {
             Name = "Polska",
             Population = 38634007
         };
-        static City Russia = new City
+        static City russia = new City
         {
             Name = "Rosja",
             Population = 144463451
         };
-        static City UnitedStates = new City
+        static City unitedStates = new City
         {
             Name = "Stany Zjednoczone",
             Population = 325365189
         };
-        static City Europe = new City
+        static City europe = new City
         {
             Name = "Europa",
             Population = 741447158
         };
-        static City China = new City
+        static City china = new City
         {
             Name = "Chiny",
             Population = 1403500365
         };
-        static City Asia = new City
+        static City asia = new City
         {
             Name = "Azja",
             Population = 4462676731
         };
-        static City AllButAustralia = new City
+        static City allButAustralia = new City
         {
             Name = "wszystko oprócz Australii",
             Population = 7575286600
         };
-        static City World = new City
+        static City world = new City
         {
             Name = "świat",
             Population = 7600000000
@@ -226,27 +256,27 @@ namespace ZombieSim
         /// <summary>
         /// Lista gromadząca wszystkie obiekty typu City.
         /// </summary>
-        public static List<City> CityList = new List<City>();
+        public static List<City> cityList = new List<City>();
 
         /// <summary>
-        /// Funkcja wypełniająca listę CityList wszystkimi dostępnymi obiektami typu City.
+        /// Funkcja wypełniająca listę cityList wszystkimi dostępnymi obiektami typu City.
         /// </summary>
-        public static void fillCityList()
+        public static void fillcityList()
         {
-            CityList.Add(Monako);
-            CityList.Add(Radom);
-            CityList.Add(Wroclaw);
-            CityList.Add(Belgrad);
-            CityList.Add(Paris);
-            CityList.Add(NewYork);
-            CityList.Add(Poland);
-            CityList.Add(Russia);
-            CityList.Add(UnitedStates);
-            CityList.Add(Europe);
-            CityList.Add(China);
-            CityList.Add(Asia);
-            CityList.Add(AllButAustralia);
-            CityList.Add(World);
+            cityList.Add(monako);
+            cityList.Add(radom);
+            cityList.Add(wroclaw);
+            cityList.Add(belgrad);
+            cityList.Add(paris);
+            cityList.Add(newYork);
+            cityList.Add(poland);
+            cityList.Add(russia);
+            cityList.Add(unitedStates);
+            cityList.Add(europe);
+            cityList.Add(china);
+            cityList.Add(asia);
+            cityList.Add(allButAustralia);
+            cityList.Add(world);
         }
     }
 }
