@@ -109,7 +109,7 @@ namespace ZombieSim
         /// </summary>
         /// <returns></returns>
         private bool checkForWin() {
-            if (GameData.Zombies.Count >= 100)
+            if (GameData.Zombies.Count >= 7000000000)
             {
                 timerCount.Stop();
                 pictureBoxButton.Enabled = false;
@@ -143,8 +143,13 @@ namespace ZombieSim
             string toolTipText;
             if (e.RowIndex >= 0)
             {
-                toolTipText = GameData.Upgrades[e.RowIndex].Description + "\n\nCurrent upgrade cost: " + GameData.Upgrades[e.RowIndex].Cost
-                + "\n\nAmount of upgrades owned: " + GameData.Upgrades[e.RowIndex].Count;
+                Upgrade u = GameData.Upgrades[e.RowIndex];
+                toolTipText = u.Name.ToUpper() 
+                    + " [owned: " + u.Count + "] "
+                    + "[cost: " + u.Cost + "]"
+                    + "\n\n" + u.Description
+                    + "\n\nProduces " + u.ZombiesPerTick + " zombies per second"
+                    + "\nGives " + u.ZombiesPerClick + " zombies per click";
                 DataGridViewCell cell = this.dataGridViewUpgrades.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 cell.ToolTipText = toolTipText;
             }

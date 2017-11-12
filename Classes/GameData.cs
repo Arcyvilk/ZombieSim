@@ -15,10 +15,10 @@ namespace ZombieSim
         /// <summary>
         /// Game description shown in the help file.
         /// </summary>
-        public static string GameDescription { get; set; } = "Every time you press a button," +
+        public static string GameDescription { get; set; } = "Every time you press a button, " +
             "one person somewhere in the world gets turned into a zombie.\n" +
             "Your goal is to turn the whole humanity into zombies. " +
-            "Using brains (1 zombie = 1 brain), you can unlock unique upgrades which speed up this process.\n\n" +
+            "Using brains (1 zombie = 1 brain), you can unlock upgrades which speed up this process.\n\n" +
             "Good luck!";
         public static Zombies Zombies { get; set; } = new Zombies();
 
@@ -45,8 +45,8 @@ namespace ZombieSim
             Description = "A homeless dog haunted by the disease. Warning, it bites!",
             Cost = 50,
             Count = 0,
-            ZombiesPerTick = 5,
-            ZombiesPerClick = 0
+            ZombiesPerTick = 7,
+            ZombiesPerClick = 1
         };
         /// <summary>
         /// Data structure of the "Vaccine causing zombizm" upgrade.
@@ -56,10 +56,10 @@ namespace ZombieSim
             Name = "Vaccine causing zombizm",
             Picture = "vaccine",
             Description = "Vaccine causing zombizm. Do not pretend they didn't try to warn you.",
-            Cost = 100,
+            Cost = 200,
             Count = 0,
-            ZombiesPerTick = 10,
-            ZombiesPerClick = 0
+            ZombiesPerTick = 20,
+            ZombiesPerClick = 5
         };
         /// <summary>
         /// Data structure of the "Toxic waste" upgrade.
@@ -69,10 +69,10 @@ namespace ZombieSim
             Name = "Toxic waste",
             Picture = "waste",
             Description = "Toxic, radioactive wastes.",
-            Cost = 400,
+            Cost = 500,
             Count = 0,
-            ZombiesPerTick = 20,
-            ZombiesPerClick = 0
+            ZombiesPerTick = 50,
+            ZombiesPerClick = 10
         };
         /// <summary>
         /// Data structure of the "Mad Scientist" upgrade.
@@ -82,9 +82,9 @@ namespace ZombieSim
             Name = "Mad scientist",
             Picture = "scientist",
             Description = "This nice scientist devoted his life to turn the whole humanity into zombies.",
-            Cost = 1000,
+            Cost = 1200,
             Count = 0,
-            ZombiesPerTick = 50,
+            ZombiesPerTick = 100,
             ZombiesPerClick = 0
         };
         /// <summary>
@@ -97,8 +97,8 @@ namespace ZombieSim
             Description = "The Old Gods enjoy a nice altar and a bloody sacrifice.",
             Cost = 2000,
             Count = 0,
-            ZombiesPerTick = 100,
-            ZombiesPerClick = 0
+            ZombiesPerTick = 250,
+            ZombiesPerClick = 50
         };
 
         /// <summary>
